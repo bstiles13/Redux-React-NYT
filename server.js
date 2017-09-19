@@ -11,6 +11,7 @@ app.use(express.static(__dirname + "/public"));
 
 let mongoose = require('mongoose');
 let db = process.env.MONGODB_URI || "mongodb://localhost/nytreact";
+let Article = require('./models/article.js');
 
 mongoose.connect(db, function (error) {
     if (error) {
@@ -20,6 +21,22 @@ mongoose.connect(db, function (error) {
     }
 });
 
+
+app.get("/api/articles/:id?", function (req, res) {
+    var query;
+    if (req.query) {
+        query = req.query;
+    }
+    else {
+        query = req.params.id ? { _id: req.params.id } : {};
+    }
+    Article.find(query)
+        .then(function (doc) {
+            res.json(doc);
+        }).catch(function (err) {
+            res.json(err);
+        });
+});
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + './public/index.html'));
