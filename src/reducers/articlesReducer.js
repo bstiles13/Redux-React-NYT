@@ -1,6 +1,14 @@
 let axios = require('axios');
 
-export default function() {
+export default function () {
+    // axios.get('/articles')
+    //     .then(function (response) {
+    //         console.log(response.data);
+    //         return response.data;
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
     return [
         {
             id: 1,

@@ -22,15 +22,8 @@ mongoose.connect(db, function (error) {
 });
 
 
-app.get("/api/articles/:id?", function (req, res) {
-    var query;
-    if (req.query) {
-        query = req.query;
-    }
-    else {
-        query = req.params.id ? { _id: req.params.id } : {};
-    }
-    Article.find(query)
+app.get("/articles", function (req, res) {
+    Article.find({})
         .then(function (doc) {
             res.json(doc);
         }).catch(function (err) {

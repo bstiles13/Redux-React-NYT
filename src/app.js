@@ -7,6 +7,10 @@ import Main from './components/Main';
 
 let store = createStore(reducers);
 
+store.subscribe(() => {
+  console.log("store changed", store.getState())
+})
+
 ReactDOM.render(
   <Provider store={store}>
     <Main />
