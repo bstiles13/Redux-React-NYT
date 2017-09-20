@@ -4,7 +4,7 @@ export default function(state={
     end: "n/a"
 }, action) {
     switch (action.type) {
-        case "SEARCH": 
+        case "UPDATE_SEARCH": 
         state = {...state, [Object.keys(action.payload)[0]]: action.payload[Object.keys(action.payload)[0]]}
         break;
     }

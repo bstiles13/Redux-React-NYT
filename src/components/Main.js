@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchForm from './SearchForm';
-import Results from './Results';
+import Articles from './Articles';
 
 class Main extends React.Component {
     render() {
@@ -10,7 +10,7 @@ class Main extends React.Component {
                 <hr/>
                 <SearchForm />
                 <hr/>
-                <Results />
+                <Articles />
             </idv>
         )
     }

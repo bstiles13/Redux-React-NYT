@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import articlesReducer from './articlesReducer.js';
-import searchReducer from './searchReducer.js';
+import updateSearchReducer from './updateSearchReducer.js';
+import submitSearchReducer from './submitSearchReducer.js';
 
 let reducers = combineReducers({
-    articles: articlesReducer,
-    search: searchReducer
+    search: updateSearchReducer,
+    articles: submitSearchReducer
 })
 
 export default reducers;
