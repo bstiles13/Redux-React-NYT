@@ -31105,7 +31105,11 @@ var Articles = function (_React$Component) {
                             'p',
                             { className: 'mb-1' },
                             article.snippet
-                        )
+                        ),
+                        _react2.default.createElement('i', {
+                            className: article.favorited ? "fa fa-star" : "fa fa-star-o",
+                            'aria-hidden': 'true'
+                        })
                     );
                 });
             }

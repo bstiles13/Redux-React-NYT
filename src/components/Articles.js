@@ -17,6 +17,10 @@ class Articles extends React.Component {
                             <small>{article.pub_date ? article.pub_date.substr(0, 10) : ""}</small>
                         </div>
                         <p className="mb-1">{article.snippet}</p>
+                        <i
+                            className={article.favorited ? "fa fa-star" : "fa fa-star-o"}
+                            aria-hidden="true"
+                        />
                     </div>
                 )
             })
