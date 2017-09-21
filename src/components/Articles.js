@@ -11,7 +11,13 @@ class Articles extends React.Component {
         } else {
             return this.props.articles.map(article => {
                 return (
-                    <a href={article.web_url} target="_blank" className="list-group-item list-group-item-action" key={article._id}>{article.headline.main}</a>
+                    <div className="list-group-item list-group-item-action flex-column align-items-start" key={article._id}>
+                        <div className="d-flex w-100 justify-content-between">
+                            <a href={article.web_url} target="_blank" ><h5 className="mb-1">{article.headline.main}</h5></a>
+                            <small>{article.pub_date ? article.pub_date.substr(0, 10) : ""}</small>
+                        </div>
+                        <p className="mb-1">{article.snippet}</p>
+                    </div>
                 )
             })
         }
