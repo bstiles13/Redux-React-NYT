@@ -25,11 +25,12 @@ class Favorites extends React.Component {
                         </div>
                         <p className="mb-1">{favorite.snippet}</p>
                         <i
-                            className={favorite.favorited ? "fa fa-star" : "fa fa-star-o"}
+                            className="fa fa-trash favorite"
                             aria-hidden="true"
                             onClick={() => this.props.setFavorite({
                                 id: favorite._id,
-                                favorited: favorite.favorited
+                                favorited: favorite.favorited,
+                                page: 'favorites'
                             })}
                         />
                     </div>
@@ -40,8 +41,13 @@ class Favorites extends React.Component {
 
     render() {
         return (
-            <div>
-                <h3>Hello World!</h3>
+            <div className="container">
+                <div className="jumbotron jumbotron-fluid text-center">
+                    <div className="container">
+                        <h1 className="display-3">Your Favorite Articles</h1>
+                        <p className="lead">Your very best articles.</p>
+                    </div>
+                </div>
                 <div className="list-group">
                     {this.showFavorites()}
                 </div>

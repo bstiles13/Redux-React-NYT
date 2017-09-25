@@ -13409,18 +13409,22 @@ var setFavorite = exports.setFavorite = function setFavorite(article) {
         axios.post('/setfavorite', article).then(function (data) {
             console.log('sent favorite');
             console.log(data.data);
-            axios.get('/articles').then(function (data) {
-                dispatch({
-                    type: 'SEARCH_RESULTS',
-                    payload: data.data
+            if (article.page == 'articles') {
+                axios.get('/articles').then(function (data) {
+                    dispatch({
+                        type: 'SEARCH_RESULTS',
+                        payload: data.data
+                    });
                 });
-            });
-            axios.get('/favorites').then(function (data) {
-                dispatch({
-                    type: 'GET_FAVORITES',
-                    payload: data.data
+            }
+            if (article.page == 'favorites') {
+                axios.get('/favorites').then(function (data) {
+                    dispatch({
+                        type: 'GET_FAVORITES',
+                        payload: data.data
+                    });
                 });
-            });
+            }
         });
     };
 };
@@ -29967,7 +29971,7 @@ var Navbar = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'nav',
-                { className: 'navbar navbar-toggleable-md navbar-light bg-faded' },
+                { className: 'navbar navbar-toggleable-md navbar-light bg-faded navbar-inverse bg-inverse' },
                 _react2.default.createElement(
                     'button',
                     { className: 'navbar-toggler navbar-toggler-right', type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbarNavAltMarkup', 'aria-controls': 'navbarNavAltMarkup', 'aria-expanded': 'false', 'aria-label': 'Toggle navigation' },
@@ -29976,7 +29980,7 @@ var Navbar = function (_React$Component) {
                 _react2.default.createElement(
                     'span',
                     { className: 'navbar-brand' },
-                    'NYT Archive'
+                    'New York Times'
                 ),
                 _react2.default.createElement(
                     'div',
@@ -30052,7 +30056,7 @@ var Home = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'container' },
                 _react2.default.createElement(_SearchForm2.default, null),
                 _react2.default.createElement('hr', null),
                 _react2.default.createElement(_Articles2.default, null)
@@ -30117,7 +30121,8 @@ var SearchForm = function (_React$Component) {
                 { className: 'card' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'card-header' },
+                    { className: 'card-header card-inverse card-primary' },
+                    _react2.default.createElement('i', { className: 'fa fa-list-alt' }),
                     'Search Parameters'
                 ),
                 _react2.default.createElement(
@@ -31178,12 +31183,13 @@ var Articles = function (_React$Component) {
                             article.snippet
                         ),
                         _react2.default.createElement('i', {
-                            className: article.favorited ? "fa fa-star" : "fa fa-star-o",
+                            className: article.favorited ? "fa fa-star favorite" : "fa fa-star-o favorite",
                             'aria-hidden': 'true',
                             onClick: function onClick() {
                                 return _this2.props.setFavorite({
                                     id: article._id,
-                                    favorited: article.favorited
+                                    favorited: article.favorited,
+                                    page: 'articles'
                                 });
                             }
                         })
@@ -31199,7 +31205,8 @@ var Articles = function (_React$Component) {
                 { className: 'card' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'card-header' },
+                    { className: 'card-header card-inverse card-primary' },
+                    _react2.default.createElement('i', { className: 'fa fa-list' }),
                     'Search Results'
                 ),
                 _react2.default.createElement(
@@ -31317,12 +31324,13 @@ var Favorites = function (_React$Component) {
                             favorite.snippet
                         ),
                         _react2.default.createElement('i', {
-                            className: favorite.favorited ? "fa fa-star" : "fa fa-star-o",
+                            className: 'fa fa-trash favorite',
                             'aria-hidden': 'true',
                             onClick: function onClick() {
                                 return _this2.props.setFavorite({
                                     id: favorite._id,
-                                    favorited: favorite.favorited
+                                    favorited: favorite.favorited,
+                                    page: 'favorites'
                                 });
                             }
                         })
@@ -31335,11 +31343,24 @@ var Favorites = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'container' },
                 _react2.default.createElement(
-                    'h3',
-                    null,
-                    'Hello World!'
+                    'div',
+                    { className: 'jumbotron jumbotron-fluid text-center' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container' },
+                        _react2.default.createElement(
+                            'h1',
+                            { className: 'display-3' },
+                            'Your Favorite Articles'
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'lead' },
+                            'Your very best articles.'
+                        )
+                    )
                 ),
                 _react2.default.createElement(
                     'div',

@@ -8,7 +8,8 @@ class SearchForm extends React.Component {
     render() {
         return (
             <div className="card">
-                <div className="card-header">
+                <div className="card-header card-inverse card-primary">
+                    <i className="fa fa-list-alt" />
                     Search Parameters
                 </div>
                 <div className="card-block">

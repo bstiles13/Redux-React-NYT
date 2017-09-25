@@ -6,8 +6,8 @@ import Articles from './Articles';
 class Home extends React.Component {
     render() {
         return (
-            <div>
-                <SearchForm />
+            <div className="container">
+                <SearchForm/>
                 <hr />
                 <Articles />
             </div>

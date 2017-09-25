@@ -20,11 +20,12 @@ class Articles extends React.Component {
                         </div>
                         <p className="mb-1">{article.snippet}</p>
                         <i
-                            className={article.favorited ? "fa fa-star" : "fa fa-star-o"}
+                            className={article.favorited ? "fa fa-star favorite" : "fa fa-star-o favorite"}
                             aria-hidden="true"
                             onClick={() => this.props.setFavorite({
                                 id: article._id,
-                                favorited: article.favorited
+                                favorited: article.favorited,
+                                page: 'articles'
                             })}
                         />
                     </div>
@@ -36,7 +37,8 @@ class Articles extends React.Component {
     render() {
         return (
             <div className="card">
-                <div className="card-header">
+                <div className="card-header card-inverse card-primary">
+                    <i className="fa fa-list" />
                     Search Results
                 </div>
                 <div className="card-block">
