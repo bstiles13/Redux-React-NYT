@@ -13403,12 +13403,8 @@ Object.defineProperty(exports, "__esModule", {
 var axios = __webpack_require__(68);
 
 var setFavorite = exports.setFavorite = function setFavorite(article) {
-    console.log('sending favorite');
-    console.log(article);
     return function (dispatch) {
         axios.post('/setfavorite', article).then(function (data) {
-            console.log('sent favorite');
-            console.log(data.data);
             if (article.page == 'articles') {
                 axios.get('/articles').then(function (data) {
                     dispatch({
@@ -29895,8 +29891,6 @@ exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     var action = arguments[1];
 
-    console.log(action.payload);
-    console.log('action received');
     switch (action.type) {
         case "SEARCH_RESULTS":
             return action.payload;
@@ -29920,8 +29914,6 @@ exports.default = function () {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     var action = arguments[1];
 
-    console.log(action.payload);
-    console.log('action received');
     switch (action.type) {
         case "GET_FAVORITES":
             return action.payload;
@@ -30200,8 +30192,6 @@ Object.defineProperty(exports, "__esModule", {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var updateSearch = exports.updateSearch = function updateSearch(event) {
-    console.log(event.target.name);
-    console.log(event.target.value);
     return {
         type: "UPDATE_SEARCH",
         payload: _defineProperty({}, event.target.name, event.target.value)
@@ -30221,12 +30211,8 @@ Object.defineProperty(exports, "__esModule", {
 var axios = __webpack_require__(68);
 
 var submitSearch = exports.submitSearch = function submitSearch(parameters) {
-    console.log('submitting');
-    console.log(parameters);
     return function (dispatch) {
         axios.post('/search', parameters).then(function (data) {
-            console.log('success');
-            console.log(data.data);
             dispatch({
                 type: 'SEARCH_RESULTS',
                 payload: data.data
@@ -31399,11 +31385,8 @@ Object.defineProperty(exports, "__esModule", {
 var axios = __webpack_require__(68);
 
 var getFavorites = exports.getFavorites = function getFavorites() {
-    console.log('getting favorites');
     return function (dispatch) {
         axios.get('/favorites').then(function (data) {
-            console.log('got favorites');
-            console.log(data.data);
             dispatch({
                 type: 'GET_FAVORITES',
                 payload: data.data
