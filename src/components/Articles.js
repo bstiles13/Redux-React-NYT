@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setFavorite } from '../actions/setFavoriteAction.js';
 
 class Articles extends React.Component {
 
@@ -20,6 +22,10 @@ class Articles extends React.Component {
                         <i
                             className={article.favorited ? "fa fa-star" : "fa fa-star-o"}
                             aria-hidden="true"
+                            onClick={() => this.props.setFavorite({
+                                id: article._id,
+                                favorited: article.favorited
+                            })}
                         />
                     </div>
                 )
@@ -49,4 +55,8 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Articles);
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ setFavorite: setFavorite }, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Articles);

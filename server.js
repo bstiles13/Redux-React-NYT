@@ -26,7 +26,7 @@ mongoose.connect(db, function (error) {
 
 
 app.get("/articles", function (req, res) {
-    Article.find({})
+    Article.find({ archived: false })
         .then(function (doc) {
             res.json(doc);
         }).catch(function (err) {
@@ -56,7 +56,7 @@ app.post('/search', function (req, res) {
     axios.get(url).then((data) => {
 
         let articles = data.data.response.docs;
-        
+
         Article.updateMany({}, { $set: { "archived": true } }, function (err, next) {
             Article.remove({ favorited: false }, function (err, result) {
                 Article.insertMany(articles, { ordered: false }).then((response) => {
@@ -67,7 +67,7 @@ app.post('/search', function (req, res) {
                     // res.json(err.writeErrors);
                     let errors = err.writeErrors;
                     errors.forEach(doc => {
-                        Article.update({'_id': articles[doc.index]._id}, { $set: { "archived": false }}, function(status) {
+                        Article.update({ '_id': articles[doc.index]._id }, { $set: { "archived": false } }, function (status) {
                             console.log('success');
                         });
                     })
@@ -78,6 +78,26 @@ app.post('/search', function (req, res) {
             })
         });
 
+    })
+})
+
+app.get('/favorites', function (req, res) {
+    Article.find({ favorited: true }).then(response => {
+        console.log(response);
+        res.json(response);
+    }).catch(err => {
+        console.log(err);
+    })
+})
+
+app.post('/setfavorite', function (req, res) {
+    let id = req.body.id;
+    let status;
+    req.body.favorited ? status = false : status = true;
+    Article.update({ '_id': id }, { favorited: status }).then(response => {
+        res.send('done');
+    }).catch(err => {
+        console.log(err);
     })
 })
 
